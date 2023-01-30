@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .navBtn {
+    @apply hidden md:inline-flex cursor-pointer transition-all duration-150 ease-in-out hover:scale-125 h-6 w-6;
+  }
+  .customContainer {
+    @apply container mx-auto lg:max-w-6xl md:max-w-3xl sm:max-w-md;
+  }
+}
