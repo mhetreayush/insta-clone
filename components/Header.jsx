@@ -33,10 +33,16 @@ const Header = () => {
             <HiOutlineUserGroup className="navBtn" />
             <AiOutlineHeart className="navBtn" />
             <GiHamburgerMenu size={24} className="md:hidden cursor-pointer" />
-            <img
+            {/* <img
               src="https://links.papareact.com/3ke"
               alt="Profile Picture"
               className="h-10 rounded-full cursor-pointer"
+            /> */}
+            <Image
+              src="/assets/myPic.jpg"
+              height={30}
+              width={30}
+              className="contain rounded-full cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
             />
           </div>
         </div>
