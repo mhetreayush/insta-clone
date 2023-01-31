@@ -4,31 +4,31 @@ const Posts = () => {
   const posts = [
     {
       id: "123",
-      username: "mhetre__ayush",
+      username: faker.internet.userName(),
       userImg: faker.image.avatar(),
       img: faker.image.avatar(),
-      caption: "Hey",
+      caption: faker.lorem.lines(),
     },
     {
       id: "12",
-      username: "mhetre__ayush",
+      username: faker.internet.userName(),
       userImg: faker.image.avatar(),
       img: faker.image.avatar(),
-      caption: "Hey",
+      caption: faker.lorem.lines(),
     },
     {
       id: "23",
-      username: "mhetre__ayush",
+      username: faker.internet.userName(),
       userImg: faker.image.avatar(),
       img: faker.image.avatar(),
-      caption: "Hey",
+      caption: faker.lorem.lines(),
     },
     {
       id: "13",
-      username: "mhetre__ayush",
+      username: faker.internet.userName(),
       userImg: faker.image.avatar(),
       img: faker.image.avatar(),
-      caption: "Hey",
+      caption: faker.lorem.lines(),
     },
   ];
   return (

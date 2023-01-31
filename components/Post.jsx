@@ -2,6 +2,7 @@ import { BsBookmark, BsThreeDots } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsChat } from "react-icons/bs";
 import { HiOutlinePaperAirplane } from "react-icons/hi";
+import { HiOutlineEmojiHappy } from "react-icons/hi";
 const Post = ({ id, userImg, img, username, caption }) => {
   return (
     <div className="my-7">
@@ -28,17 +29,30 @@ const Post = ({ id, userImg, img, username, caption }) => {
       {/* Buttons */}
       <div className="flex items center justify-between">
         <div className="flex items-center justify-between gap-x-3">
-          <AiOutlineHeart className="" />
-          <BsChat className="-scale-x-100 " />
-          <HiOutlinePaperAirplane />
+          <AiOutlineHeart className="svgButton" />
+          <BsChat className="-scale-x-100 svgButton" />
+          <HiOutlinePaperAirplane className="svgButton" />
         </div>
-        <BsBookmark />
+        <BsBookmark className="svgButton" />
       </div>
       {/* Captions */}
+      <p className="truncate my-2">
+        <span className="font-bold mr-1">{username} </span>
+        {caption}
+      </p>
 
       {/* Comments */}
 
       {/* Input Box */}
+      <form action="" className="flex items-center">
+        <HiOutlineEmojiHappy className="svgButton" />
+        <input
+          type="text"
+          className="border-none flex-1 bg-transparent  focus:ring-0 outline-none mx-2"
+          placeholder="Add a comment..."
+        />
+        <button className="font-semibold text-blue-400">Post</button>
+      </form>
     </div>
   );
 };
