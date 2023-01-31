@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import Story from "./Story";
-import { Children, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 const Stories = () => {
   const [suggestions, setSuggestions] = useState([]);
   useEffect(() => {
@@ -19,19 +20,23 @@ const Stories = () => {
     console.log(suggestions);
     setSuggestions(suggestions);
   }, []);
+
+  const { data: session } = useSession();
   return (
     <div className="flex overflow-x-auto gap-x-2 p-6 bg-white mt-8 border-gray-200 border rounded-sm scrollbar-thin scrollbar-thumb-black">
-      {Children.toArray(
-        suggestions.map((profile) => {
-          return (
-            <Story
-              key={profile.id}
-              image={profile.avatar}
-              username={profile.username}
-            />
-          );
-        })
+      {session && (
+        <Story image={session.user.image} username={session.user.username} />
       )}
+
+      {suggestions.map((profile) => {
+        return (
+          <Story
+            key={profile.id}
+            image={profile.avatar}
+            username={profile.username}
+          />
+        );
+      })}
     </div>
   );
 };

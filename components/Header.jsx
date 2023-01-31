@@ -3,6 +3,7 @@ import { AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlinePaperAirplane, HiOutlineUserGroup } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 const Header = () => {
   const { data: session } = useSession();
 
@@ -24,7 +25,9 @@ const Header = () => {
             </div>
           </div>
           <div className="flex space-x-4 items-center">
-            <AiOutlineHome className="navBtn" />
+            <Link href="/" passHref>
+              <AiOutlineHome className="navBtn" />
+            </Link>
             {session ? (
               <>
                 <div className="relative navBtn">
