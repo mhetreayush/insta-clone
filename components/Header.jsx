@@ -1,9 +1,11 @@
-import Image from "next/image";
 import { BsInstagram, BsPlusCircle, BsSearch } from "react-icons/bs";
 import { AiOutlineHeart, AiOutlineHome } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlinePaperAirplane, HiOutlineUserGroup } from "react-icons/hi";
+import { useSession, signIn, signOut } from "next-auth/react";
 const Header = () => {
+  const { data: session } = useSession();
+
   return (
     <div className="border-b sticky top-0 drop-shadow bg-white z-50">
       <div className="customContainer">
@@ -23,27 +25,29 @@ const Header = () => {
           </div>
           <div className="flex space-x-4 items-center">
             <AiOutlineHome className="navBtn" />
-            <div className="relative navBtn">
-              <HiOutlinePaperAirplane className="navBtn rotate-45 " />
-              <div className="absolute -top-2 -right-2 bg-red-500 text-white font-semibold animate-pulse rounded-full h-5 w-5 flex items-center justify-center text-xs">
-                3
-              </div>
-            </div>
-            <BsPlusCircle className="navBtn" />
-            <HiOutlineUserGroup className="navBtn" />
-            <AiOutlineHeart className="navBtn" />
-            <GiHamburgerMenu size={24} className="md:hidden cursor-pointer" />
-            {/* <img
-              src="https://links.papareact.com/3ke"
-              alt="Profile Picture"
-              className="h-10 rounded-full cursor-pointer"
-            /> */}
-            <Image
-              src="/assets/myPic.jpg"
-              height={30}
-              width={30}
-              className="contain rounded-full cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
-            />
+            {session ? (
+              <>
+                <div className="relative navBtn">
+                  <HiOutlinePaperAirplane className="navBtn rotate-45 " />
+                  <div className="absolute -top-2 -right-2 bg-red-500 text-white font-semibold animate-pulse rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                    3
+                  </div>
+                </div>
+                <BsPlusCircle className="navBtn" />
+                <HiOutlineUserGroup className="navBtn" />
+                <AiOutlineHeart className="navBtn" />
+                <GiHamburgerMenu className="md:hidden cursor-pointer p-0 m-0 h-[24px] w-[24px]" />
+                <img
+                  onClick={signOut}
+                  src={session?.user?.image}
+                  height={30}
+                  width={30}
+                  className="contain rounded-full cursor-pointer hover:scale-110 transition transform duration-200 ease-out"
+                />
+              </>
+            ) : (
+              <button onClick={signIn}>Sign In</button>
+            )}
           </div>
         </div>
       </div>

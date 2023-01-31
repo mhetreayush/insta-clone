@@ -10,7 +10,6 @@ const Suggestions = () => {
       company: faker.company.name(),
     }));
     setSuggestions(suggestions);
-    console.log(faker);
   }, []);
   return (
     <div className="mt-4 ml-10 ">
