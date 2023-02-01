@@ -1,47 +1,33 @@
 import { faker } from "@faker-js/faker";
 import Post from "./Post";
+import { useState, useEffect } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../firebase";
 const Posts = () => {
-  const posts = [
-    {
-      id: "123",
-      username: faker.internet.userName(),
-      userImg: faker.image.avatar(),
-      img: faker.image.avatar(),
-      caption: faker.lorem.lines(),
-    },
-    {
-      id: "12",
-      username: faker.internet.userName(),
-      userImg: faker.image.avatar(),
-      img: faker.image.avatar(),
-      caption: faker.lorem.lines(),
-    },
-    {
-      id: "23",
-      username: faker.internet.userName(),
-      userImg: faker.image.avatar(),
-      img: faker.image.avatar(),
-      caption: faker.lorem.lines(),
-    },
-    {
-      id: "13",
-      username: faker.internet.userName(),
-      userImg: faker.image.avatar(),
-      img: faker.image.avatar(),
-      caption: faker.lorem.lines(),
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, "posts"), orderBy("timestamp", "desc")),
+        (snapshot) => {
+          setPosts(snapshot.docs);
+        }
+      ),
+
+    [db]
+  );
   return (
     <div>
-      {posts.map((post) => {
+      {posts?.map((post) => {
         return (
           <Post
             key={post.id}
             id={post.id}
-            username={post.username}
-            userImg={post.userImg}
-            img={post.img}
-            caption={post.caption}
+            username={post.data().username}
+            userImg={post.data().profileImg}
+            img={post.data().image}
+            caption={post.data().caption}
           />
         );
       })}

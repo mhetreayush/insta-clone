@@ -4,14 +4,22 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlinePaperAirplane, HiOutlineUserGroup } from "react-icons/hi";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { modalState } from "../atoms/modalAtom";
+import { useRecoilState } from "recoil";
 const Header = () => {
   const { data: session } = useSession();
-
+  const router = useRouter();
+  const [modalOpen, setModalOpen] = useRecoilState(modalState);
   return (
     <div className="border-b sticky top-0 drop-shadow bg-white z-50">
       <div className="customContainer">
         <div className="flex px-4 w-full justify-between items-center">
-          <BsInstagram className="cursor-pointer" size={24} />
+          <BsInstagram
+            onClick={() => router.push("/")}
+            className="cursor-pointer"
+            size={24}
+          />
           <div>
             <div className="relative p-3 rounded-md mt-1">
               <div className="absolute inset-y-0 p-3 flex items-center pointer-events-none">
@@ -25,9 +33,10 @@ const Header = () => {
             </div>
           </div>
           <div className="flex space-x-4 items-center">
-            <Link href="/" passHref>
-              <AiOutlineHome className="navBtn" />
-            </Link>
+            <AiOutlineHome
+              onClick={() => router.push("/")}
+              className="navBtn"
+            />
             {session ? (
               <>
                 <div className="relative navBtn">
@@ -36,7 +45,10 @@ const Header = () => {
                     3
                   </div>
                 </div>
-                <BsPlusCircle className="navBtn" />
+                <BsPlusCircle
+                  onClick={() => setModalOpen(true)}
+                  className="navBtn"
+                />
                 <HiOutlineUserGroup className="navBtn" />
                 <AiOutlineHeart className="navBtn" />
                 <GiHamburgerMenu className="md:hidden cursor-pointer p-0 m-0 h-[24px] w-[24px]" />

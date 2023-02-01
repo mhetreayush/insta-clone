@@ -17,7 +17,6 @@ const Stories = () => {
       // phone: faker.phone.number(),
       // website: faker.internet.domainName(),
     }));
-    console.log(suggestions);
     setSuggestions(suggestions);
   }, []);
 
