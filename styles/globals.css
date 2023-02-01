@@ -4,10 +4,10 @@
 
 @layer components {
   .navBtn {
-    @apply hidden md:inline-flex cursor-pointer transition-all duration-150 ease-in-out hover:scale-125 h-6 w-6;
+    @apply cursor-pointer transition-all duration-150 ease-in-out hover:scale-125 h-6 w-6;
   }
   .customContainer {
-    @apply container mx-auto lg:max-w-5xl md:max-w-2xl sm:max-w-md;
+    @apply container mx-auto lg:max-w-5xl md:max-w-2xl sm:max-w-md px-4;
   }
   .svgButton {
     @apply h-6 w-6 cursor-pointer;

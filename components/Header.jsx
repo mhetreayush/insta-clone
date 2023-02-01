@@ -21,7 +21,7 @@ const Header = () => {
             size={24}
           />
           <div>
-            <div className="relative p-3 rounded-md mt-1">
+            <div className="relative p-3 rounded-md mt-1 hidden md:inline-block">
               <div className="absolute inset-y-0 p-3 flex items-center pointer-events-none">
                 <BsSearch />
               </div>
@@ -32,7 +32,7 @@ const Header = () => {
               />
             </div>
           </div>
-          <div className="flex space-x-4 items-center">
+          <div className="flex space-x-4 items-center py-3">
             <AiOutlineHome
               onClick={() => router.push("/")}
               className="navBtn"
@@ -49,9 +49,8 @@ const Header = () => {
                   onClick={() => setModalOpen(true)}
                   className="navBtn"
                 />
-                <HiOutlineUserGroup className="navBtn" />
+                {/* <HiOutlineUserGroup className="navBtn" /> */}
                 <AiOutlineHeart className="navBtn" />
-                <GiHamburgerMenu className="md:hidden cursor-pointer p-0 m-0 h-[24px] w-[24px]" />
                 <img
                   onClick={signOut}
                   src={session?.user?.image}
