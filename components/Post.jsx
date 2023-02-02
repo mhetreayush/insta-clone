@@ -12,6 +12,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   onSnapshot,
   orderBy,
   query,
@@ -19,12 +20,13 @@ import {
   setDoc,
 } from "firebase/firestore";
 import Moment from "react-moment";
-const Post = ({ id, userImg, img, username, caption }) => {
+const Post = ({ id, userImg, img, username, caption, type }) => {
   const { data: session } = useSession();
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+  // console.log(type);
   useEffect(
     () =>
       onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
@@ -51,7 +53,6 @@ const Post = ({ id, userImg, img, username, caption }) => {
       ),
     [db, id]
   );
-
   const likePost = async () => {
     if (hasLiked) {
       await deleteDoc(doc(db, "posts", id, "likes", session.user.uid));
@@ -74,6 +75,7 @@ const Post = ({ id, userImg, img, username, caption }) => {
       timestamp: serverTimestamp(),
     });
   };
+  // console.log(likes);
   return (
     <div className="my-7">
       {/* Header */}
@@ -90,11 +92,28 @@ const Post = ({ id, userImg, img, username, caption }) => {
 
       {/* img */}
       <div className="my-2 border rounded-sm flex justify-center">
-        <img
-          src={img}
-          className="object-cover w-full max-h-[400px] max-w-[400px]"
-          alt={caption}
-        />
+        {!type && (
+          <img
+            src={img}
+            className="object-cover w-full max-h-[400px] max-w-[400px]"
+            alt={caption}
+          />
+        )}
+        {type && type === "image" && (
+          <img
+            src={img}
+            className="object-cover w-full max-h-[400px] max-w-[400px]"
+            alt={caption}
+          />
+        )}
+        {type && type === "video" && (
+          // <video>
+          <iframe
+            src="https://firebasestorage.googleapis.com/v0/b/instagram-clone-3c6f6.appspot.com/o/posts%2Ftln0xVX1tV8uzDi9rAmV%2Fimage?alt=media&token=cc507771-31ed-4968-a2b9-6630926bf184"
+            allowFullScreen
+          />
+          // </video>
+        )}
       </div>
       {/* Buttons */}
       {session && (

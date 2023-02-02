@@ -11,6 +11,7 @@ const Home = () => {
       </Head>
       {/* Header */}
       <Header />
+
       <Feed />
 
       {/*  Modal */}

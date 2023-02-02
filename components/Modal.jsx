@@ -28,12 +28,13 @@ const Modal = () => {
     // 2) Get the Post ID for the newly created post
     // 3) Upload the image to firebase storage
     // 4) Get a download URL from firebase storage and update the original post with image
-
+    console.log(selectedFile);
     const docRef = await addDoc(collection(db, "posts"), {
       username: session.user.username,
       caption: captionRef.current.value,
       profileImg: session.user.image,
       timestamp: serverTimestamp(),
+      type: selectedFile.includes("data:video") ? "video" : "image",
     });
 
     const imageRef = ref(storage, `posts/${docRef.id}/image`);
@@ -46,7 +47,7 @@ const Modal = () => {
         });
       }
     );
-
+    // console.log(selectedFile.includes("data:video"));
     setModalOpen(false);
     setLoading(false);
     setSelectedFile(null);
